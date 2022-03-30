@@ -6,7 +6,7 @@ describe('Profile Tests', () => {
         // this doesn't exist, and need to come later
         // cy.login_magic()
 
-        cy.visit('https://wordpress.com/me')
+        cy.visit('https://wordpress.com/me');
 
     })
 
@@ -45,17 +45,28 @@ describe('Profile Tests', () => {
 
     it('Checks Gravatar link', () => {
         cy.contains('Gravatar.com')
-            .click()
+            .click();
 
         //This will stop working from here because Cypress doesn't allow you to change home domains.
     });
 
+    it('Hides Gravatar Profile', () => {
+        cy.get('[class="components-form-toggle"]')
+            .should('be.visible');
+
+        cy.get('[type="checkbox"]')
+            .click();
+
+        cy.get('[class="components-form-toggle is-checked"]')
+            .should('be.visible');
+    })
+
     after(function () {
         cy.get('button')
             .contains('Log out')
-            .click()
+            .click();
 
         cy.get('[title="Log in"]')
-            .should('be.visible')
+            .should('be.visible');
     });
 });
